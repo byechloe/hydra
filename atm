@@ -1,0 +1,54 @@
+#CITP110
+#Program: ATM Program
+#Programmer: Chloe
+#Date: 9/29/14
+#Abstract: This program is a simulation of an ATM. It will process deposits, 
+#           withdrawals, and invalid transaction codes, and provide a 
+#           current balance
+#
+
+#Main function definition
+def main():
+    name = raw_input("What is your name? ")
+    account_id = input("Enter your account ID: ")
+    transaction_code = raw_input("Press W or w for Withdrawal, press D or d for Deposit: ")
+    previous_balance = float(input("What is your previous balance? "))
+    transaction_amount = float(input("Enter transaction amount: "))
+    
+    if transaction_code == "W" or transaction_code == "w":
+        withdrawal_process(previous_balance, transaction_amount)
+    elif transaction_code == "D" or transaction_code == "d":
+        deposit_process(previous_balance, transaction_amount)
+    else:
+        invalid_process(previous_balance)
+        
+#Invalid process definition
+def invalid_process(previous_balance):
+    new_balance = previous_balance
+    print ("Invalid transaction code:")
+    print ("Please type W or w for Withdrawal")
+    print ("Please type D or d for Deposit")
+    print_function(new_balance)
+    
+#deposit process definition
+def deposit_process(previous_balance, transaction_amount):
+    new_balance = transaction_amount + previous_balance
+    print_function(new_balance)
+
+#withdrawal process definition
+def withdrawal_process(previous_balance, transaction_amount):
+    if previous_balance >= transaction_amount:
+        new_balance = previous_balance - transaction_amount
+        print_function(new_balance)
+    
+    else: 
+        print ("Invalid Transaction: Not Sufficient Funds")
+        new_balance = previous_balance
+        print_function(new_balance)
+
+# Print function definition
+def print_function(new_balance):
+    print ('Your balance is now $', format(new_balance, '.2f'))
+    
+# Call main function
+main()
